@@ -64,14 +64,16 @@ class SenseConnect:
         result = json.loads(self.ws.recv())
         if 'method' in result.keys():
             result = json.loads(self.ws.recv())
-        # y = json.loads(result)
         for doclist in result['result']['qDocList']:
-            if 'qLastReloadTime' in doclist.keys() and doclist['qTitle'].lower() in appname:
+            if 'qLastReloadTime' in doclist.keys() and doclist['qTitle'].lower() in appname.lower():
                 reload_status.append(doclist['qTitle'])
                 reload_status.append(doclist['qLastReloadTime'])
                 break
-        #self.ws.close()
-        return reload_status
+        # print(reload_status,len(reload_status))
+        if len(reload_status)>0:
+            return reload_status
+        else:
+            return print('App not found!\n[Localhost] : Make sure spelling of app is correct.\n[Enterprise] : Make sure App ID is correct.')
     
     # evaluate the expression and return the output of set analysis(expression)
     def evaluate_expression(self,appname,expression,e_o_dim):
