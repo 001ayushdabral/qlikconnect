@@ -1,0 +1,1 @@
+A python code to interact with Qliksense (desktop and Enterprise).
